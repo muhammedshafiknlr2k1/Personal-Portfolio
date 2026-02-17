@@ -1,183 +1,470 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Jane Doe - Portfolio</title>
-    <link rel="stylesheet" href="./style.css"/>
-    <script src="./script.js"></script>
-  </head>
-  <body>
-    <!-- Navigation Bar -->
-    <nav>
-      <div id="home">
-        <div class="profile_name">
-          SHAFI S
-          <div class="contact_info">
-            <img src="html_finalprojimages/envelope.png" alt="https://icons8.com/icon/124377/circled-envelope"/>
-          jdoe@jeemail.com
-        </div>
-        <div style="clear:both;"></div>
-        <div class="contact_info">
-          <img src="html_finalprojimages/phone.png" alt="https://icons8.com/icon/124377/circled-envelope"/>
-          +13456764598
+<html lang="en" class="scroll-smooth dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SHAFI S</title>
+  <meta name="description" content="Professional portfolio website for a Software Engineer." />
 
-        </div>
-        </div>
-        <div class="topdiv">
-          <a class="topmenu" href="#about-me">About Me</a>
-          <a class="topmenu" href="#about-me">Skills</a>
-          <a class="topmenu" href="#about-me">Projects</a>
-          <a class="topmenu" href="#about-me">Recommendations</a>
-          <!-- Add the links for Skills, Projects and Recommendation here -->
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif']
+          },
+          colors: {
+            brand: {
+              50: '#eef7ff',
+              100: '#d8edff',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1'
+            }
+          },
+          boxShadow: {
+            soft: '0 10px 30px -12px rgba(2, 132, 199, 0.25)'
+          }
+        }
+      }
+    };
+  </script>
 
+  <!-- Inter font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    .section-fade {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 700ms ease, transform 700ms ease;
+    }
+    .section-fade.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-800 dark:bg-slate-950 dark:text-slate-100 font-sans antialiased">
+  <!-- Background accents -->
+  <div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+    <div class="absolute -top-24 -right-16 h-72 w-72 rounded-full bg-brand-100 dark:bg-brand-700/20 blur-3xl"></div>
+    <div class="absolute -bottom-32 -left-16 h-80 w-80 rounded-full bg-cyan-100 dark:bg-cyan-700/20 blur-3xl"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-30 border-b border-slate-200/60 bg-white/80 backdrop-blur dark:border-slate-800 dark:bg-slate-950/80">
+    <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+      <a href="#home" class="text-xs font-semibold tracking-wide text-slate-900 dark:text-slate-100 sm:text-sm">SHAFI S | Portfolio</a>
+      <div class="flex items-center gap-2 sm:gap-3">
+        <div class="hidden items-center gap-4 md:flex">
+          <a href="#experience" class="text-sm text-slate-600 hover:text-brand-600 dark:text-slate-300">Experience</a>
+          <a href="#education" class="text-sm text-slate-600 hover:text-brand-600 dark:text-slate-300">Education</a>
+          <a href="#projects" class="text-sm text-slate-600 hover:text-brand-600 dark:text-slate-300">Projects</a>
+          <a href="#skills" class="text-sm text-slate-600 hover:text-brand-600 dark:text-slate-300">Skills</a>
+          <a href="#certifications" class="text-sm text-slate-600 hover:text-brand-600 dark:text-slate-300">Certifications</a>
+          <a href="#contact" class="text-sm text-slate-600 hover:text-brand-600 dark:text-slate-300">Contact</a>
         </div>
-      </div>    
+        <button id="mobile-menu-toggle" type="button" class="rounded-lg border border-slate-300 p-2 text-slate-700 transition hover:border-brand-500 hover:text-brand-600 dark:border-slate-700 dark:text-slate-200 dark:hover:border-brand-500 md:hidden" aria-label="Toggle navigation menu" aria-expanded="false">
+          <i data-lucide="menu" class="h-4 w-4"></i>
+        </button>
+        <button id="theme-toggle" type="button" class="rounded-lg border border-slate-300 p-2 text-slate-700 transition hover:border-brand-500 hover:text-brand-600 dark:border-slate-700 dark:text-slate-200 dark:hover:border-brand-500" aria-label="Toggle dark mode">
+          <i data-lucide="moon" class="h-4 w-4"></i>
+        </button>
+      </div>
     </nav>
-
-    <!-- About Me -->
-    <section id="about-me" class="container">
-      <div>
-        <img src="myimg.jpg" class="profile_image" />
+    <div id="mobile-menu" class="hidden border-t border-slate-200 px-4 py-3 dark:border-slate-800 md:hidden">
+      <div class="flex flex-col gap-2 text-sm">
+        <a href="#experience" class="rounded-md px-2 py-1 text-slate-600 hover:bg-slate-100 hover:text-brand-600 dark:text-slate-300 dark:hover:bg-slate-900">Experience</a>
+        <a href="#education" class="rounded-md px-2 py-1 text-slate-600 hover:bg-slate-100 hover:text-brand-600 dark:text-slate-300 dark:hover:bg-slate-900">Education</a>
+        <a href="#projects" class="rounded-md px-2 py-1 text-slate-600 hover:bg-slate-100 hover:text-brand-600 dark:text-slate-300 dark:hover:bg-slate-900">Projects</a>
+        <a href="#skills" class="rounded-md px-2 py-1 text-slate-600 hover:bg-slate-100 hover:text-brand-600 dark:text-slate-300 dark:hover:bg-slate-900">Skills</a>
+        <a href="#certifications" class="rounded-md px-2 py-1 text-slate-600 hover:bg-slate-100 hover:text-brand-600 dark:text-slate-300 dark:hover:bg-slate-900">Certifications</a>
+        <a href="#contact" class="rounded-md px-2 py-1 text-slate-600 hover:bg-slate-100 hover:text-brand-600 dark:text-slate-300 dark:hover:bg-slate-900">Contact</a>
       </div>
+    </div>
+  </header>
 
-      <div>
-          <h1>
-            Hi, I'm SHAFI! <img src="html_finalprojimages/waving-hand.png" width="60px"/>
+  <main id="home" class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <!-- Hero Section -->
+    <section class="section-fade py-14 sm:py-20 lg:py-28">
+      <div class="grid items-center gap-10 lg:grid-cols-3">
+        <div class="lg:col-span-2">
+          <p class="mb-4 inline-block rounded-full border border-brand-200 bg-brand-50 px-3 py-1 text-xs font-medium text-brand-700 dark:border-brand-700/50 dark:bg-brand-900/30 dark:text-brand-200">Software Engineer</p>
+          <h1 class="max-w-3xl text-3xl font-extrabold leading-tight text-slate-900 dark:text-white sm:text-5xl lg:text-6xl">
+            Hi, I'm <span class="text-brand-600 dark:text-brand-500">Shafi S</span>.
           </h1>
-          <p>
-            I am an aspiring web developer currently enrolled in the IBM Full Stack Software Development course. My focus is on building modern, responsive, and user-friendly web applications while steadily improving my skills in HTML, CSS, JavaScript, and backend technologies. I’m passionate about turning ideas into functional solutions and eager to grow into a professional full-stack developer.
+          <p class="mt-6 max-w-2xl text-base leading-relaxed text-slate-600 dark:text-slate-300 sm:text-lg">
+            I am an aspiring software engineer with a strong focus on backend engineering, specializing in Python and frameworks such as FastAPI and Django. I am passionate about building reliable, scalable solutions and continuously learning new technologies to deliver real-world impact.
           </p>
+          <div class="mt-8 flex flex-wrap items-center gap-3">
+            <!-- Replace these profile URLs with your actual links -->
+            <a href="https://github.com/muhammedshafiknlr2k1" target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 transition hover:-translate-y-0.5 hover:border-brand-500 hover:text-brand-600 dark:border-slate-700 dark:text-slate-200">
+              <i data-lucide="github" class="h-4 w-4"></i> GitHub
+            </a>
+            <a href="https://linkedin.com/in/shafi-s" target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 transition hover:-translate-y-0.5 hover:border-brand-500 hover:text-brand-600 dark:border-slate-700 dark:text-slate-200">
+              <i data-lucide="linkedin" class="h-4 w-4"></i> LinkedIn
+            </a>
+            <!-- Put your PDF resume file in this project folder and keep the file name in href -->
+            <a href="Shafi_Resume.pdf" download class="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-brand-700">
+              <i data-lucide="download" class="h-4 w-4"></i> Download Resume
+            </a>
+          </div>
+        </div>
+        <div class="mx-auto w-full max-w-xs">
+          <!-- Replace this photo URL with your actual professional headshot -->
+          <img src="Shafi_Photo.png" alt="Professional profile photo" class="h-56 w-56 rounded-full border border-slate-200 object-cover shadow-soft dark:border-slate-800 sm:h-80 sm:w-80" />
+        </div>
       </div>
     </section>
-              
+
+    <!-- Work Experience -->
+    <section id="experience" class="section-fade py-10 sm:py-14">
+      <div class="mb-8 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <h2 class="text-2xl font-bold text-slate-900 dark:text-white sm:text-3xl">Work Experience</h2>
+          <span class="text-sm text-slate-500 dark:text-slate-400">Professional Impact</span>
+        </div>
+      </div>
+
+      <div id="experience-list" class="grid gap-5">
+        <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+          <h3 class="text-lg font-semibold text-slate-900 dark:text-white">Company: Rockwell Automation, Bengaluru</h3>
+          <p class="mt-1 text-sm font-medium text-brand-700 dark:text-brand-300">Role: Software Engineer Intern</p>
+          <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">Year Range: Feb 2025 - Aug 2025</p>
+          <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">Experience: 6 months</p>
+          <p class="mt-3 text-sm font-semibold text-slate-700 dark:text-slate-200">Description:</p>
+          <ul class="mt-2 list-disc space-y-2 pl-5 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+            <li>Contributed to the FactoryTalk Data Mosaix (FTDM) - PharmaSuite Integration by developing and enhancing FastAPI-based REST APIs, improving reliability through robust validation, exception handling, and bug fixes.</li>
+            <li>Tested APIs extensively using Postman, identified edge cases, and implemented structured error responses to ensure predictable and consistent API behavior.</li>
+            <li>Designed and built FTDM PharmaSuite custom backend applications to solve performance bottlenecks in dashboard delivery.</li>
+            <li>Resolved a key scaling issue where eight dashboards ran under one service by splitting them into separate backend services, improving responsiveness and reducing load.</li>
+            <li>Built a Python automation script to execute multiple API calls for embedded app registration in PharmaSuite, replacing a manual and error-prone workflow.</li>
+            <li>Packaged the automation as a standalone executable, enabling the DevOps team to run faster, repeatable, and error-free setup processes.</li>
+            <li>Collaborated closely with mentors and team members while gaining hands-on exposure to professional development workflows, Git-based version control, and deployment practices.</li>
+            <li><strong>Technologies &amp; Tools:</strong> Python, FastAPI, SQLAlchemy, PostgreSQL, Git, GitLab, Docker, REST APIs, Postman.</li>
+          </ul>
+        </article>
+       
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education" class="section-fade py-10 sm:py-14">
+      <div class="mb-8 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+        <h2 class="text-2xl font-bold text-slate-900 dark:text-white sm:text-3xl">Education</h2>
+        <span class="text-sm text-slate-500 dark:text-slate-400">Academic Journey</span>
+      </div>
+
+      <div class="relative border-l-2 border-slate-200 pl-6 dark:border-slate-800">
+        <!-- Duplicate this block to add more education items -->
+        <article class="group relative mb-8 rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-soft dark:border-slate-800 dark:bg-slate-900">
+          <span class="absolute -left-[33px] top-6 h-4 w-4 rounded-full border-4 border-white bg-brand-600 dark:border-slate-950"></span>
+          <h3 class="text-lg font-semibold text-slate-900 dark:text-white">Master of Computer Applications (MCA)</h3>
+          <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">TKM College of Engineering, Kollam, Kerala</p>
+          <div class="mt-3 flex flex-wrap gap-2 text-xs">
+            <span class="rounded-md bg-slate-100 px-2 py-1 text-slate-700 dark:bg-slate-800 dark:text-slate-200">2023 - 2025</span>
+            <span class="rounded-md bg-slate-100 px-2 py-1 text-slate-700 dark:bg-slate-800 dark:text-slate-200">CGPA: 8.84/10</span>
+          </div>
+        </article>
+        <article class="group relative mb-8 rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-soft dark:border-slate-800 dark:bg-slate-900">
+          <span class="absolute -left-[33px] top-6 h-4 w-4 rounded-full border-4 border-white bg-brand-600 dark:border-slate-950"></span>
+          <h3 class="text-lg font-semibold text-slate-900 dark:text-white">Bachelor of Computer Applications (BCA)</h3>
+          <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">University of Kerala</p>
+          <div class="mt-3 flex flex-wrap gap-2 text-xs">
+            <span class="rounded-md bg-slate-100 px-2 py-1 text-slate-700 dark:bg-slate-800 dark:text-slate-200">2020 - 2023</span>
+            <span class="rounded-md bg-slate-100 px-2 py-1 text-slate-700 dark:bg-slate-800 dark:text-slate-200">CGPA: 7.86/10</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Projects Gallery -->
+    <section id="projects" class="section-fade py-10 sm:py-14">
+      <div class="mb-8 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <h2 class="text-2xl font-bold text-slate-900 dark:text-white sm:text-3xl">Projects</h2>
+          <span class="text-sm text-slate-500 dark:text-slate-400">Selected Work</span>
+        </div>
+      </div>
+
+      <div id="projects-grid" class="grid gap-6">
+        <!-- Project Card 1 -->
+        <article class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-soft dark:border-slate-800 dark:bg-slate-900">
+          <div class="h-44 w-full bg-slate-100 dark:bg-slate-800 sm:h-52 md:h-56">
+            <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=1200&q=80" alt="Blog platform preview" class="h-full w-full object-cover" />
+          </div>
+          <div class="p-5">
+            <h3 class="text-lg font-semibold text-slate-900 dark:text-white">BlogSquare - Blogging System</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">A full-stack blogging platform with secure auth, role-based workflows, moderation, search, and category-based filtering.</p>
+            <ul class="mt-3 list-disc space-y-1.5 pl-5 text-sm text-slate-600 dark:text-slate-300">
+              <li>Built secure login, registration, and password management.</li>
+              <li>Implemented RBAC for Admin, Editor, and User access control.</li>
+              <li>Developed CRUD modules for posts, categories, comments, and moderation.</li>
+              <li>Designed a responsive, SEO-friendly UI using Bootstrap and Django templates.</li>
+            </ul>
+            <div class="mt-3 flex flex-wrap gap-2 text-xs">
+              <span class="rounded-full bg-slate-100 px-2.5 py-1 text-slate-700 dark:bg-slate-800 dark:text-slate-200">Python</span>
+              <span class="rounded-full bg-slate-100 px-2.5 py-1 text-slate-700 dark:bg-slate-800 dark:text-slate-200">Django</span>
+              <span class="rounded-full bg-slate-100 px-2.5 py-1 text-slate-700 dark:bg-slate-800 dark:text-slate-200">Bootstrap</span>
+              <span class="rounded-full bg-slate-100 px-2.5 py-1 text-slate-700 dark:bg-slate-800 dark:text-slate-200">HTML/CSS</span>
+              <span class="rounded-full bg-slate-100 px-2.5 py-1 text-slate-700 dark:bg-slate-800 dark:text-slate-200">SQLite</span>
+            </div>
+            <div class="mt-4 flex flex-wrap gap-3">
+              <a href="#" class="rounded-lg bg-brand-600 px-3 py-2 text-xs font-semibold text-white transition hover:bg-brand-700">View Demo</a>
+              <a href="#" class="rounded-lg border border-slate-300 px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-brand-500 hover:text-brand-600 dark:border-slate-700 dark:text-slate-200">Source Code</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project Card 2 -->
+        <article class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-soft dark:border-slate-800 dark:bg-slate-900">
+          <div class="h-44 w-full bg-slate-100 dark:bg-slate-800 sm:h-52 md:h-56">
+            <img src="https://images.unsplash.com/photo-1693168058181-7781540896d5?auto=format&fit=crop&fm=jpg&q=80&w=1600" alt="Sign language hand gesture recognition project preview" class="h-full w-full object-cover" />
+          </div>
+          <div class="p-5">
+            <h3 class="text-lg font-semibold text-slate-900 dark:text-white">Sign Language Recognition System</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">A real-time ASL hand-gesture recognition system built to support communication for deaf and mute users.</p>
+            <ul class="mt-3 list-disc space-y-1.5 pl-5 text-sm text-slate-600 dark:text-slate-300">
+              <li>Collected a custom dataset of 52,000 images using OpenCV.</li>
+              <li>Trained and evaluated CNN, VGG16, and InceptionV3 models.</li>
+              <li>Deployed the best-performing model with a real-time interface.</li>
+            </ul>
+            <div class="mt-3 flex flex-wrap gap-2 text-xs">
+              <span class="rounded-full bg-slate-100 px-2.5 py-1 text-slate-700 dark:bg-slate-800 dark:text-slate-200">Python</span>
+              <span class="rounded-full bg-slate-100 px-2.5 py-1 text-slate-700 dark:bg-slate-800 dark:text-slate-200">OpenCV</span>
+              <span class="rounded-full bg-slate-100 px-2.5 py-1 text-slate-700 dark:bg-slate-800 dark:text-slate-200">TensorFlow</span>
+              <span class="rounded-full bg-slate-100 px-2.5 py-1 text-slate-700 dark:bg-slate-800 dark:text-slate-200">NumPy</span>
+              <span class="rounded-full bg-slate-100 px-2.5 py-1 text-slate-700 dark:bg-slate-800 dark:text-slate-200">customTkinter</span>
+            </div>
+            <div class="mt-4 flex flex-wrap gap-3">
+              <a href="#" class="rounded-lg bg-brand-600 px-3 py-2 text-xs font-semibold text-white transition hover:bg-brand-700">View Demo</a>
+              <a href="#" class="rounded-lg border border-slate-300 px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-brand-500 hover:text-brand-600 dark:border-slate-700 dark:text-slate-200">Source Code</a>
+            </div>
+          </div>
+        </article>
+
+       
+      </div>
+    </section>
+
     <!-- Skills -->
-    <section id="skills">
-      <h2>Skills</h2>
-      <div style="clear:both;"></div>
-
-      <div class="all_skills">
-        <div class="skill">
-          <img src="html_finalprojimages/html5.png"/>
-          <h6>HTML</h6>
-          <p>2 years experience</p>
-        </div>  
-
-        <div class="skill">
-          <img src="html_finalprojimages/js.jpeg"/>
-          <h6>JavaScript</h6>
-          <p>3 years experience</p>
-        </div>  
-
-        <div class="skill">
-            <img src="https://img.icons8.com/?size=100&id=hZvpN3zV45Yf&format=png&color=000000"/>
-            <h6>Python</h6>
-            <p>1 years experience</p>
-          </div> 
-
-          <div class="skill">
-            <img src="https://img.icons8.com/?size=100&id=13679&format=png&color=000000"/>
-            <h6>Java</h6>
-            <p>4 years experience</p>
-          </div> 
-
-          <div class="skill">
-            <img src="https://img.icons8.com/?size=100&id=IuuVVwsdTi2v&format=png&color=000000"/>
-            <h6>django</h6>
-            <p>1 years experience</p>
-          </div> 
-
-          <div class="skill">
-            <img src="https://img.icons8.com/?size=100&id=TtXEs5SeYLG8&format=png&color=000000"/>
-            <h6>Flask</h6>
-            <p>1 years experience</p>
-          </div> 
-
-        <!-- Add more skills here -->
-
-
+    <section id="skills" class="section-fade py-10 sm:py-14">
+      <div class="mb-8 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+        <h2 class="text-2xl font-bold text-slate-900 dark:text-white sm:text-3xl">Skills</h2>
+        <span class="text-sm text-slate-500 dark:text-slate-400">Core Stack</span>
       </div>
-    </section>
-          
-    <!-- Projects -->
-    <section class="projects" id="projects">
-      <h2>
-        Projects
-      </h2>
-      <div style="clear:both;"></div>
 
-        <div id="projects-container" class="projects-container">
-          <div class="project-card">
-            <h3>Personal Task Manager Web App</h3>
-            <ul>
-              <li>A simple task manager built with HTML, CSS, and JavaScript to create, edit, and track daily tasks.</li>
-            </ul>
-          </div>
-          <hr>
-          <div class="project-card">
-            <h3>Responsive Portfolio Website</h3>
-            <ul>
-              <li>A responsive personal portfolio showcasing my projects, skills, and contact details with clean, modern styling.</li>
-            </ul>
-          </div>
-          <hr>
-          <div class="project-card">
-            <h3>Weather Dashboard Application</h3>
-            <ul>
-              <li>A web app that fetches real-time weather data from a public API and displays it in a simple dashboard.</li>
-            </ul>
-          </div>
-    </div>
-    </section>
-    <div style="clear:both;"></div>
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <article class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+          <h3 class="text-sm font-semibold text-slate-900 dark:text-white">Languages</h3>
+          <div class="mt-3 flex flex-wrap gap-2">
+            <span class="rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-700 dark:bg-slate-800 dark:text-slate-200">Python</span>
+            <span class="rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-700 dark:bg-slate-800 dark:text-slate-200">Java</span>
+            <span class="rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-700 dark:bg-slate-800 dark:text-slate-200">JavaScript</span>
+            <span class="rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-700 dark:bg-slate-800 dark:text-slate-200">SQL</span>
 
-    <!-- Recommendations -->
-    <section id="recommendations">
-      <h2>Recommendations</h2>
-      <div style="clear:both;"></div>
-      <div class="all_recommendations" id="all_recommendations">
-        <div class="recommendation">
-          <span>&#8220;</span>
-          Working with Shafi was a pleasure. His ability to quickly learn new technologies and deliver clean, efficient code impressed our entire team.
-          <span>&#8221;</span>
-        </div>
-        <div class="recommendation">
-          <span>&#8220;</span>
-          Shafi consistently demonstrated a proactive attitude and a strong commitment to quality while building our web application.
-          <span>&#8221;</span>
-        </div>
-        <div class="recommendation">
-          <span>&#8220;</span>
-          Shafi’s attention to detail and enthusiasm for solving problems made a significant impact on our project’s success.
-          <span>&#8221;</span>
-        </div>
+            
+          </div>
+        </article>
+        <article class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+          <h3 class="text-sm font-semibold text-slate-900 dark:text-white">Backend & Frameworks</h3>
+          <div class="mt-3 flex flex-wrap gap-2">
+            <span class="rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-700 dark:bg-slate-800 dark:text-slate-200">FastAPI</span>
+            <span class="rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-700 dark:bg-slate-800 dark:text-slate-200">Django</span>
+            <span class="rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-700 dark:bg-slate-800 dark:text-slate-200">REST APIs</span>
+                        <span class="rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-700 dark:bg-slate-800 dark:text-slate-200">SQLAlchemy</span>
+
+          </div>
+        </article>
+        <article class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+          <h3 class="text-sm font-semibold text-slate-900 dark:text-white">Tools & Practices</h3>
+          <div class="mt-3 flex flex-wrap gap-2">
+            <span class="rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-700 dark:bg-slate-800 dark:text-slate-200">Git & GitHub</span>
+            <span class="rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-700 dark:bg-slate-800 dark:text-slate-200">Postman</span>
+            <span class="rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-700 dark:bg-slate-800 dark:text-slate-200">AWS</span>
+            <span class="rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-700 dark:bg-slate-800 dark:text-slate-200">Docker</span>
+          </div>
+        </article>
       </div>
     </section>
 
-    <!-- Recommendation Form -->
-    <section id="contact">
-      <div class="flex_center">
-        <fieldset>
-          <legend class="introduction">Leave a Recommendation</legend>          
-          <input type="text" placeholder="Name (Optional)"> <br/>
-          <textarea id="new_recommendation" cols="500" rows="10" placeholder="Message"></textarea>
-          <div class="flex_center">
-            <button id="recommend_btn" onclick="addRecommendation()">Submit</button>
-          </div>
-        </fieldset>
+    <!-- Certifications -->
+    <section id="certifications" class="section-fade py-10 sm:py-14">
+      <div class="mb-8 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <h2 class="text-2xl font-bold text-slate-900 dark:text-white sm:text-3xl">Certifications</h2>
+          <span class="text-sm text-slate-500 dark:text-slate-400">Courses & Credentials</span>
+        </div>
+      </div>
+      <div id="cert-list" class="grid gap-4 sm:grid-cols-2">
+        <article class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+          <h3 class="text-base font-semibold text-slate-900 dark:text-white">IBM Full Stack Software Developer Professional Certificate</h3>
+          <p class="mt-1 text-sm text-slate-600 dark:text-slate-300"><strong>Issued by:</strong> Coursera (IBM)</p>
+          <a href="https://coursera.org/share/687c4cd87b5a671e021a1f4edaec44e1" target="_blank" rel="noreferrer" class="mt-3 inline-flex items-center gap-2 text-sm font-medium text-brand-600 hover:text-brand-500">View Certificate <i data-lucide="external-link" class="h-4 w-4"></i></a>
+        </article>
+        <article class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+          <h3 class="text-base font-semibold text-slate-900 dark:text-white">The Complete FastAPI Course With OAuth & JWT Authentication</h3>
+          <p class="mt-1 text-sm text-slate-600 dark:text-slate-300"><strong>Issued by:</strong> Udemy</p>
+          <a href="https://drive.google.com/file/d/1_ZmHzOJF1lTVJQ_yJ3zoiDxM-IftMWRR/view?usp=drive_link" target="_blank" rel="noreferrer" class="mt-3 inline-flex items-center gap-2 text-sm font-medium text-brand-600 hover:text-brand-500">View Certificate <i data-lucide="external-link" class="h-4 w-4"></i></a>
+        </article>
+        <article class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+          <h3 class="text-base font-semibold text-slate-900 dark:text-white">Career Essentials in Software Development By Microsoft and LinkedIn</h3>
+          <p class="mt-1 text-sm text-slate-600 dark:text-slate-300"><strong>Issued by:</strong> Microsoft</p>
+          <a href="https://drive.google.com/file/d/1D9INWaM1kKY2buATrFhX-_invEEqmmiU/view?usp=drivesdk" target="_blank" rel="noreferrer" class="mt-3 inline-flex items-center gap-2 text-sm font-medium text-brand-600 hover:text-brand-500">View Certificate <i data-lucide="external-link" class="h-4 w-4"></i></a>
+        </article>
+        <article class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+          <h3 class="text-base font-semibold text-slate-900 dark:text-white">Problem Solving Through Programming in C</h3>
+          <p class="mt-1 text-sm text-slate-600 dark:text-slate-300"><strong>Issued by:</strong> IIT Kharagpur, NPTEL</p>
+          <a href="https://drive.google.com/file/d/15fXl2dhF6sqFjE3HzfI9_l-ieUxc7d9d/view?usp=drivesdk" target="_blank" rel="noreferrer" class="mt-3 inline-flex items-center gap-2 text-sm font-medium text-brand-600 hover:text-brand-500">View Certificate <i data-lucide="external-link" class="h-4 w-4"></i></a>
+        </article>
+        
       </div>
     </section>
 
-    <div class="iconbutton">
-      <a href="#home">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" width="63px">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15 11.25l-3-3m0 0l-3 3m3-3v7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-      </a>
-    </div>
+    <!-- Contact Form -->
+    <section id="contact" class="section-fade py-10 sm:py-14">
+      <div class="mb-8 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+        <h2 class="text-2xl font-bold text-slate-900 dark:text-white sm:text-3xl">Contact</h2>
+        <span class="text-sm text-slate-500 dark:text-slate-400">Let's build something</span>
+      </div>
 
-    <div class="popup" id="popup" class="flex_center">
-      <img src="html_finalprojimages/checkmark--outline.svg"/>
-      <h3>Thanks for leaving a recommendation!</h3>
-      <button onclick="showPopup(false)">Ok</button>
+      <div class="mb-5 rounded-xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+        <p class="text-sm text-slate-600 dark:text-slate-300">Prefer email?</p>
+        <a href="mailto:muhammedshafiknlr65@gmail.com" class="mt-1 inline-flex items-center gap-2 text-sm font-semibold text-brand-600 transition hover:text-brand-500 break-all">
+          <i data-lucide="mail" class="h-4 w-4"></i> muhammedshafiknlr65@gmail.com
+        </a>
+      </div>
+
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900 sm:p-8">
+        <form id="contact-form" class="space-y-5">
+          <div>
+            <label for="name" class="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">Name</label>
+            <input id="name" name="name" type="text" required class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-200 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:focus:ring-brand-800" placeholder="Your name" />
+          </div>
+          <div>
+            <label for="email" class="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">Email</label>
+            <input id="email" name="email" type="email" required class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-200 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:focus:ring-brand-800" placeholder="you@example.com" />
+          </div>
+          <div>
+            <label for="message" class="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">Message</label>
+            <textarea id="message" name="message" rows="5" required class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-200 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:focus:ring-brand-800" placeholder="Tell me about your project..."></textarea>
+          </div>
+          <button id="submit-btn" type="submit" class="inline-flex items-center justify-center rounded-lg bg-brand-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand-700 disabled:cursor-not-allowed disabled:opacity-70">
+            Send Message
+          </button>
+          <p id="form-status" class="text-sm text-slate-600 dark:text-slate-300"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-200 py-8 dark:border-slate-800">
+    <div class="mx-auto max-w-6xl px-4 text-center text-sm text-slate-500 dark:text-slate-400 sm:px-6 lg:px-8">
+      © <span id="year"></span> Shafi. All rights reserved.
     </div>
-  </body>
+  </footer>
+
+  <script>
+    // ---------------------------
+    // Dark/Light mode management
+    // ---------------------------
+    const root = document.documentElement;
+    const themeToggle = document.getElementById('theme-toggle');
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    function applyTheme(theme) {
+      if (theme === 'dark') {
+        root.classList.add('dark');
+        themeToggle.innerHTML = '<i data-lucide="sun" class="h-4 w-4"></i>';
+      } else {
+        root.classList.remove('dark');
+        themeToggle.innerHTML = '<i data-lucide="moon" class="h-4 w-4"></i>';
+      }
+      lucide.createIcons();
+    }
+
+    const storedTheme = localStorage.getItem('theme');
+    applyTheme(storedTheme || 'dark');
+
+    themeToggle.addEventListener('click', () => {
+      const nextTheme = root.classList.contains('dark') ? 'light' : 'dark';
+      localStorage.setItem('theme', nextTheme);
+      applyTheme(nextTheme);
+    });
+
+    mobileMenuToggle.addEventListener('click', () => {
+      const isHidden = mobileMenu.classList.contains('hidden');
+      mobileMenu.classList.toggle('hidden');
+      mobileMenuToggle.setAttribute('aria-expanded', String(isHidden));
+      mobileMenuToggle.innerHTML = isHidden
+        ? '<i data-lucide="x" class="h-4 w-4"></i>'
+        : '<i data-lucide="menu" class="h-4 w-4"></i>';
+      lucide.createIcons();
+    });
+
+    mobileMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+        mobileMenuToggle.innerHTML = '<i data-lucide="menu" class="h-4 w-4"></i>';
+        lucide.createIcons();
+      });
+    });
+
+    // ---------------------------
+    // Section reveal animation
+    // ---------------------------
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.section-fade').forEach((section) => observer.observe(section));
+
+    // ---------------------------
+    // Contact form via web mail compose
+    // ---------------------------
+    const contactForm = document.getElementById('contact-form');
+    const formStatus = document.getElementById('form-status');
+
+    contactForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const name = contactForm.name.value.trim();
+      const email = contactForm.email.value.trim();
+      const message = contactForm.message.value.trim();
+      const toEmail = 'muhammedshafiknlr65@gmail.com';
+      const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
+      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(toEmail)}&su=${subject}&body=${body}`;
+      const mailtoUrl = `mailto:${toEmail}?subject=${subject}&body=${body}`;
+
+      formStatus.textContent = 'Opening Gmail compose...';
+      formStatus.className = 'text-sm text-emerald-600';
+      const popup = window.open(gmailUrl, '_blank', 'noopener,noreferrer');
+
+      if (!popup) {
+        formStatus.textContent = 'Popup blocked. Opening your default email app instead...';
+        formStatus.className = 'text-sm text-amber-600';
+        window.location.href = mailtoUrl;
+      }
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+    lucide.createIcons();
+  </script>
+</body>
 </html>
